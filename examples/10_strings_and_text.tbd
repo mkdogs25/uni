@@ -1,0 +1,30 @@
+# Strings, multi-line text and escaping: the lexer's edge cases.
+# Covers: multi-line strings and their indentation, literal braces, quotes,
+# raw HTML, pre-formatted text, long tag lines continued.
+
+page "Text":
+    state name = "world"
+
+    article:
+        p "Hello, {name}!"
+        p "Braces are written {{like this}}."      # Q4 escaping '{'
+        p 'Single quotes work and "doubles" inside.'
+        p "Tabs\tand\nnewlines are escapes; \"quotes\" too."
+
+        p """
+            This paragraph spans several lines.
+            The common leading indentation is stripped,
+            and {name} still interpolates.
+            """                                    # Q4 dedent rule
+
+        pre """
+            def keep():
+                return "indentation inside pre is preserved"
+            """
+
+        div html="<em>trusted</em> raw HTML"       # Q9 raw HTML escape hatch
+
+        a.button.big#cta href="/start" target="_self"
+            \ title="A long tag continued on the next line" "Start"   # Q4 line continuation
+
+        p r"Raw string: {not interpolated}\n"      # Q4 raw strings

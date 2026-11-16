@@ -1,0 +1,52 @@
+# Sign-up form with validation.
+# Covers: several bound inputs, derived validity, conditional error messages,
+# attribute expressions, submit handling with the event object, elif.
+
+page "Sign up":
+    state email = ""
+    state password = ""
+    state agree = False
+    state touched = False
+    state submitted = False
+
+    derived email_ok = "@" in email and "." in email
+    derived password_ok = len(password) >= 8
+    derived valid = email_ok and password_ok and agree
+
+    form.signup:
+        style:
+            display: grid
+            gap: 0.75rem
+            max-width: 24rem
+        on submit.prevent(event):                  # Q11 event argument
+            touched = True
+            if valid:
+                submitted = True
+                print("submitting", email, event.type)
+
+        label "Email":
+            input type="email" bind=email
+        if touched and not email_ok:
+            p.error "Enter a valid email address."
+
+        label "Password":
+            input type="password" bind=password
+        if touched and not password_ok:
+            p.error "At least 8 characters ({8 - len(password)} to go)."
+
+        label:
+            input type="checkbox" bind=agree
+            "I agree to the terms"                 # bare text child
+
+        button type="submit" disabled=(touched and not valid) "Create account"
+
+        if submitted:
+            p.ok "Thanks, check your inbox."
+        elif touched and not valid:
+            p.error "Please fix the errors above."
+
+    style global:                                  # Q7 global styles
+        .error:
+            color: crimson
+        .ok:
+            color: seagreen

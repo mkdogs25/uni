@@ -1,0 +1,38 @@
+# Load JSON from an API.
+# Covers: async def, await, on mount, loading/error states, try/except,
+# a button that reloads.
+
+page "Users":
+    state users = []
+    state loading = True
+    state error: str | None = None                 # optional type hint with union
+
+    async def load():
+        loading = True
+        error = None
+        try:
+            users = await fetch_json("https://jsonplaceholder.typicode.com/users")
+        except e:                                  # Q16 except syntax
+            error = str(e)
+        finally:
+            loading = False
+
+    on mount:                                      # Q12 lifecycle
+        await load()
+
+    div:
+        h1 "Users"
+        button "Reload":
+            on click:
+                await load()
+
+        if loading:
+            p "Loading…"
+        elif error:
+            p.error "Could not load users: {error}"
+        else:
+            ul:
+                for u in users key u.id:
+                    li:
+                        a href="mailto:{u.email}" "{u.name}"
+                        " ({u.company.name})"

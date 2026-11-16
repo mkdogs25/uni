@@ -1,0 +1,25 @@
+# Imports, props, callbacks and components as tags.
+# Covers: from ... import, passing functions as props, light type checking
+# (the commented-out line should be a compile-time warning).
+
+from "./components/button.tbd" import Button       # Q6 import syntax
+
+component Panel(heading: str):
+    section.panel:
+        style:
+            padding: 1rem
+            border: 1px solid #ccc
+        h3 "{heading}"
+        slot
+
+page "Imports":
+    state log: list[str] = []
+
+    Panel heading="Actions":
+        Button label="Save" on_press=(lambda: log.append("saved"))
+        Button label="Delete" kind="danger" on_press=(lambda: log.append("deleted"))
+        # Button label=42                          # Q15 type warning: label expects str
+
+    Panel heading="Log":
+        for entry in log:
+            p "{entry}"

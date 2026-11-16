@@ -1,0 +1,43 @@
+# A clock and a stopwatch.
+# Covers: timers, mount/unmount cleanup, watchers (effects), JS interop.
+
+component Clock:
+    state now = js.Date.new()                      # Q18 JS interop
+
+    on mount:
+        timer = every(1000, lambda: now = js.Date.new())   # Q18 assignment in lambda?
+    on unmount:
+        cancel(timer)
+
+    time "{now.toLocaleTimeString()}"
+
+component Stopwatch:
+    state running = False
+    state elapsed = 0
+    state laps: list[int] = []
+    timer = None                                   # plain (non-reactive) local
+
+    def tick():
+        elapsed += 100
+
+    watch running:                                 # Q12 effect on change
+        if running:
+            timer = every(100, tick)
+        else:
+            cancel(timer)
+
+    div.stopwatch:
+        p.time "{elapsed / 1000:.1f}s"             # Q4 format spec in interpolation
+        button "{'Stop' if running else 'Start'}":   # Q4 quotes inside interpolation
+            on click:
+                running = not running
+        button "Lap" disabled=(not running):
+            on click:
+                laps.append(elapsed)
+        ol:
+            for lap in laps:
+                li "{lap / 1000:.1f}s"
+
+page "Time":
+    Clock
+    Stopwatch

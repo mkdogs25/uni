@@ -1,0 +1,34 @@
+# The brief's illustrative example, made complete.
+# Covers: state, interpolation, scoped style, pseudo-state, events, if/else, for.
+
+page "Counter":                                    # Q10 entry point
+    state count = 0
+    state items = [{name: "Apples"}, {name: "Pears"}]   # Q16 dict literal keys
+
+    div.box#main:
+        style:
+            padding: 16px
+            border-radius: 8px
+
+        h1 "Hello"
+
+        button.primary "Clicked {count}":          # Q1 trailing text
+            style:
+                padding: 8px 16px
+                background: blue
+                hover:                             # Q2 pseudo-state
+                    background: darkblue
+            on click:                              # Q3 style/on vs children
+                count += 1
+
+        if count > 5:
+            p "That's a lot of clicks"
+        else:
+            p "Keep going"
+
+        ul:
+            for item in items:
+                li "{item.name}"
+
+        a.link href="/home" "Home"
+        img src="cat.png" alt="A cat"

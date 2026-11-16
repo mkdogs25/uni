@@ -1,0 +1,41 @@
+# Searchable, filterable list with conditional rendering.
+# Covers: for with nested if, empty state, derived filtering, for-else (?),
+# loop index, inline conditional expressions, select binding.
+
+page "Animals":
+    state query = ""
+    state kind = "all"
+    state animals = [
+        {name: "Cat", kind: "mammal", legs: 4},
+        {name: "Sparrow", kind: "bird", legs: 2},
+        {name: "Dog", kind: "mammal", legs: 4},
+        {name: "Snake", kind: "reptile", legs: 0},
+    ]                                              # Q4 multi-line literal
+
+    derived shown = [a for a in animals if query.lower() in a.name.lower() and (kind == "all" or a.kind == kind)]
+
+    section:
+        input type="search" placeholder="Search" bind=query
+        select bind=kind:
+            option value="all" "All"
+            option value="mammal" "Mammals"
+            option value="bird" "Birds"
+            option value="reptile" "Reptiles"
+
+        p.count "{len(shown)} of {len(animals)} shown"
+
+        ol:
+            for i, a in enumerate(shown) key a.name:
+                li class:odd=(i % 2 == 1):
+                    strong "{a.name}"
+                    " is a {a.kind}"
+                    if a.legs == 0:
+                        em " with no legs"
+                    else:
+                        " with {a.legs} legs"
+            else:                                  # Q17 for-else = empty state?
+                li.none "No matches for “{query}”."
+
+        style:
+            .odd:
+                background: #f6f6f6

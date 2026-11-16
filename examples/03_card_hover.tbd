@@ -1,0 +1,38 @@
+# A reusable card with hover styles, props and a slot.
+# Covers: component definition, typed props with defaults, slot, nested
+# pseudo-states, transitions, ':' inside style values, components used as tags.
+
+component Card(title: str, accent: str = "steelblue", featured: bool = False):   # Q6
+    article.card class:featured=featured:
+        style:
+            border: 1px solid #ddd                 # Q8 '#' in values
+            border-radius: 12px
+            padding: 1rem
+            transition: transform 150ms ease, box-shadow 150ms ease
+            background: url("data:image/svg+xml;utf8,<svg/>")   # Q2 ':' inside a value
+            hover:
+                transform: translateY(-2px)
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15)
+            &.featured:
+                border-color: {accent}             # Q7 interpolated style value
+            focus-within:
+                outline: 2px solid {accent}
+
+        h2 "{title}":
+            style:
+                margin: 0 0 0.5rem
+                color: {accent}
+        slot                                       # Q14 children go here
+
+page "Cards":
+    div.grid:
+        style:
+            display: grid
+            grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr))
+            gap: 1rem
+
+        Card title="Plain":
+            p "A card with default colours."
+        Card title="Featured" accent="tomato" featured=True:
+            p "This one is highlighted."
+            a href="#more" "Read more"             # Q8 '#' inside a string

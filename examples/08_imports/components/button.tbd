@@ -1,0 +1,23 @@
+# A library file: exports components and a helper; has no page.
+
+def shade(colour: str, amount: int = 10) -> str:
+    return "color-mix(in srgb, {colour}, black {amount}%)"
+
+component Button(label: str, kind: str = "primary", on_press = None):   # Q6 callback prop
+    button.btn class:{kind}=True "{label}":        # Q9 dynamic class name
+        style:
+            padding: 0.5rem 1rem
+            border: none
+            border-radius: 6px
+            cursor: pointer
+            &.primary:
+                background: royalblue
+                color: white
+                hover:
+                    background: {shade("royalblue")}
+            &.danger:
+                background: crimson
+                color: white
+        on click:
+            if on_press:
+                on_press()

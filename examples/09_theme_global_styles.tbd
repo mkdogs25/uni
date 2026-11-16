@@ -1,0 +1,42 @@
+# Global styles, CSS variables, media queries and a dark-mode toggle.
+# Covers: style global, @-rules inside style blocks, element-name selectors,
+# reactive class on <body>-level wrapper, CSS custom properties.
+
+style global:                                      # Q7 file-level global style
+    :root:                                         # Q2 selector starting with ':'
+        --bg: white
+        --fg: #222
+        --accent: royalblue
+    .dark:
+        --bg: #111
+        --fg: #eee
+    body:
+        margin: 0
+        font-family: system-ui, sans-serif
+    @media (max-width: 600px):                     # Q2 ':' inside an at-rule
+        body:
+            font-size: 15px
+
+page "Theme":
+    state dark = False
+
+    div.app class:dark=dark:
+        style:
+            background: var(--bg)
+            color: var(--fg)
+            min-height: 100vh
+            padding: 2rem
+            @media (max-width: 600px):
+                padding: 1rem
+            a:                                     # Q2 descendant element selector vs property
+                color: var(--accent)
+            "> p":                                 # Q2 arbitrary selector as a string
+                line-height: 1.6
+
+        h1 "Theme demo"
+        p "Toggle dark mode below."
+        label:
+            input type="checkbox" bind=dark
+            " Dark mode"
+        p:
+            a href="https://example.com" target="_blank" "An external link"
