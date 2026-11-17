@@ -7,8 +7,8 @@ compiled by a Python compiler to HTML, CSS and JS.
 ## Where things are
 - Accepted decisions: `docs/adr/README.md` (index). Read before changing
   syntax, semantics, output format or architecture.
-- Open questions with options: `docs/DESIGN-QUESTIONS.md`.
-- Spec (once written): `docs/SPEC.md`.
+- Design questions (all decided, historical): `docs/DESIGN-QUESTIONS.md`.
+- Spec: `docs/SPEC.md` (draft until approved).
 - Progress journal: `docs/JOURNAL.md` — read first when resuming; update at
   the end of every work session (done, decisions, next step).
 - Example programs (also golden-test inputs): `examples/`.

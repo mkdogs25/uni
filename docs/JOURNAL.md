@@ -8,5 +8,5 @@
 - Drafted 10 example programs in `examples/` with `# Qn` markers.
 - Wrote `docs/DESIGN-QUESTIONS.md` (Q0–Q21).
 - Accepted ADRs 0001–0022 (all questions Q0–Q21). Name: Weft, `.weft`.
-- Next: revise
-  examples to match, then write `docs/SPEC.md` for approval.
+- Revised examples to match; wrote `docs/SPEC.md` draft (with proposals S1–S10 in §0).
+- Next: user reviews SPEC.md (especially §0). On approval, start phase 1 (lexer).
