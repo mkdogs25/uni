@@ -1,6 +1,6 @@
 # CLAUDE.md
 
-Personal language project (working name TBD, extension `.tbd`): one
+Weft (`.weft`, ADR 0022), a personal language: one
 indentation-based, Python-like file combining markup, styling and logic,
 compiled by a Python compiler to HTML, CSS and JS.
 

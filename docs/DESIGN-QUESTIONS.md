@@ -5,7 +5,7 @@ Nothing here is decided until you choose; each choice becomes an ADR in
 `docs/adr/`. The `# Qn` markers in `examples/` point at the code each
 question affects.
 
-File extension below is a placeholder (`.tbd`) until the name is chosen (Q21).
+All questions below are now decided; see `adr/README.md`. (Written when the extension was the placeholder `.tbd`; the name is now Weft.)
 
 ---
 

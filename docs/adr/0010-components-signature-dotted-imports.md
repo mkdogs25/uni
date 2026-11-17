@@ -11,12 +11,12 @@
   `component Card(title: str, accent: str = "steelblue"):`. Props are
   reactive and read-only inside the component (assignment is an error).
 - Imports: `from .components.button import Button` resolves relative to the
-  importing file to `./components/button.tbd`. Every top-level name is
+  importing file to `./components/button.weft`. Every top-level name is
   exported; names starting with `_` are private. Imports are resolved at
   compile time into one bundle per page.
 
 ## Alternatives
-- Path-string imports (`from "./components/button.tbd" import Button`).
+- Path-string imports (`from "./components/button.weft" import Button`).
 - `prop name: type` lines in the component body.
 
 ## Reason

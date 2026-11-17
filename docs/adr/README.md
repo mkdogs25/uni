@@ -24,3 +24,6 @@ Template: `0000-template.md`. Open questions: `../DESIGN-QUESTIONS.md`.
 | [0017](0017-logic-subset-semantics.md) | Logic subset: Python syntax, JS semantics, Python truthiness | Q16 |
 | [0018](0018-no-for-else-in-markup.md) | No special empty-list syntax | Q17 |
 | [0019](0019-js-namespace-interop.md) | JS interop via js namespace | Q18 |
+| [0020](0020-light-type-checking.md) | Light type checking as warnings | Q15 |
+| [0021](0021-hints-everywhere.md) | Type hints everywhere, Python-style | Q20 |
+| [0022](0022-name-weft.md) | Name: Weft (.weft) | Q21 |

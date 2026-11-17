@@ -7,6 +7,6 @@
   async/fetch, two-way binding, lifecycle/effects, slots.
 - Drafted 10 example programs in `examples/` with `# Qn` markers.
 - Wrote `docs/DESIGN-QUESTIONS.md` (Q0–Q21).
-- Accepted ADRs 0001–0019 (Q0–Q14, Q16–Q19).
-- Next: remaining questions (Q15, Q20, Q21), then revise
+- Accepted ADRs 0001–0022 (all questions Q0–Q21). Name: Weft, `.weft`.
+- Next: revise
   examples to match, then write `docs/SPEC.md` for approval.
