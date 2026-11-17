@@ -1,9 +1,9 @@
 # Global styles, CSS variables, media queries and a dark-mode toggle.
-# Covers: style global, @-rules inside style blocks, element-name selectors,
-# reactive class on <body>-level wrapper, CSS custom properties.
+# Exercises: style global (ADR 0011), selectors starting with ':' and '@',
+# ':' inside at-rules, element and string selectors (0004).
 
-style global:                                      # Q7 file-level global style
-    :root:                                         # Q2 selector starting with ':'
+style global:
+    :root:
         --bg: white
         --fg: #222
         --accent: royalblue
@@ -13,11 +13,11 @@ style global:                                      # Q7 file-level global style
     body:
         margin: 0
         font-family: system-ui, sans-serif
-    @media (max-width: 600px):                     # Q2 ':' inside an at-rule
+    @media (max-width: 600px):
         body:
             font-size: 15px
 
-page "Theme":
+page "Theme" lang="en":
     state dark = False
 
     div.app class:dark=dark:
@@ -28,9 +28,9 @@ page "Theme":
             padding: 2rem
             @media (max-width: 600px):
                 padding: 1rem
-            a:                                     # Q2 descendant element selector vs property
+            a:
                 color: var(--accent)
-            "> p":                                 # Q2 arbitrary selector as a string
+            "> p":
                 line-height: 1.6
 
         h1 "Theme demo"

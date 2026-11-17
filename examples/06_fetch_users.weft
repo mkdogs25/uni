@@ -1,23 +1,23 @@
 # Load JSON from an API.
-# Covers: async def, await, on mount, loading/error states, try/except,
-# a button that reloads.
+# Exercises: async def / await, on mount (ADR 0014), loading and error
+# states, try/except/finally (0017), optional union hint (0021).
 
 page "Users":
     state users = []
     state loading = True
-    state error: str | None = None                 # optional type hint with union
+    state error: str | None = None
 
     async def load():
         loading = True
         error = None
         try:
             users = await fetch_json("https://jsonplaceholder.typicode.com/users")
-        except e:                                  # Q16 except syntax
+        except Exception as e:
             error = str(e)
         finally:
             loading = False
 
-    on mount:                                      # Q12 lifecycle
+    on mount:
         await load()
 
     div:

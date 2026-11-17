@@ -1,6 +1,7 @@
 # Searchable, filterable list with conditional rendering.
-# Covers: for with nested if, empty state, derived filtering, for-else (?),
-# loop index, inline conditional expressions, select binding.
+# Exercises: for with nested if, empty state without special syntax
+# (ADR 0018), derived filtering, enumerate, select binding, multi-line
+# literal (0009), class toggles with expressions (0008).
 
 page "Animals":
     state query = ""
@@ -10,11 +11,18 @@ page "Animals":
         {name: "Sparrow", kind: "bird", legs: 2},
         {name: "Dog", kind: "mammal", legs: 4},
         {name: "Snake", kind: "reptile", legs: 0},
-    ]                                              # Q4 multi-line literal
+    ]
 
-    derived shown = [a for a in animals if query.lower() in a.name.lower() and (kind == "all" or a.kind == kind)]
+    def matches(a) -> bool:
+        return query.lower() in a.name.lower() and (kind == "all" or a.kind == kind)
+
+    derived shown = [a for a in animals if matches(a)]
 
     section:
+        style:
+            .odd:
+                background: #f6f6f6
+
         input type="search" placeholder="Search" bind=query
         select bind=kind:
             option value="all" "All"
@@ -33,9 +41,6 @@ page "Animals":
                         em " with no legs"
                     else:
                         " with {a.legs} legs"
-            else:                                  # Q17 for-else = empty state?
-                li.none "No matches for “{query}”."
 
-        style:
-            .odd:
-                background: #f6f6f6
+        if not shown:
+            p.none "No matches for “{query}”."

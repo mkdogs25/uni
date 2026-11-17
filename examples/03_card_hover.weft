@@ -1,20 +1,21 @@
 # A reusable card with hover styles, props and a slot.
-# Covers: component definition, typed props with defaults, slot, nested
-# pseudo-states, transitions, ':' inside style values, components used as tags.
+# Exercises: component signature props (ADR 0010), slot (0016), nested
+# pseudo-states and ':' inside values (0004), '#' in values (0007),
+# dynamic style values (0011).
 
-component Card(title: str, accent: str = "steelblue", featured: bool = False):   # Q6
+component Card(title: str, accent: str = "steelblue", featured: bool = False):
     article.card class:featured=featured:
         style:
-            border: 1px solid #ddd                 # Q8 '#' in values
+            border: 1px solid #ddd
             border-radius: 12px
             padding: 1rem
             transition: transform 150ms ease, box-shadow 150ms ease
-            background: url("data:image/svg+xml;utf8,<svg/>")   # Q2 ':' inside a value
+            background: url("data:image/svg+xml;utf8,<svg/>") no-repeat
             hover:
                 transform: translateY(-2px)
                 box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15)
             &.featured:
-                border-color: {accent}             # Q7 interpolated style value
+                border-color: {accent}
             focus-within:
                 outline: 2px solid {accent}
 
@@ -22,7 +23,7 @@ component Card(title: str, accent: str = "steelblue", featured: bool = False):  
             style:
                 margin: 0 0 0.5rem
                 color: {accent}
-        slot                                       # Q14 children go here
+        slot
 
 page "Cards":
     div.grid:
@@ -35,4 +36,4 @@ page "Cards":
             p "A card with default colours."
         Card title="Featured" accent="tomato" featured=True:
             p "This one is highlighted."
-            a href="#more" "Read more"             # Q8 '#' inside a string
+            a href="#more" "Read more"

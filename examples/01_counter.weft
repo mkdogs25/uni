@@ -1,9 +1,10 @@
 # The brief's illustrative example, made complete.
-# Covers: state, interpolation, scoped style, pseudo-state, events, if/else, for.
+# Exercises: state, interpolation, scoped style, pseudo-state, events,
+# if/else, for, attributes then trailing text (ADRs 0004-0006, 0012).
 
-page "Counter":                                    # Q10 entry point
+page "Counter":
     state count = 0
-    state items = [{name: "Apples"}, {name: "Pears"}]   # Q16 dict literal keys
+    state items = [{name: "Apples"}, {name: "Pears"}]
 
     div.box#main:
         style:
@@ -12,13 +13,13 @@ page "Counter":                                    # Q10 entry point
 
         h1 "Hello"
 
-        button.primary "Clicked {count}":          # Q1 trailing text
+        button.primary "Clicked {count}":
             style:
                 padding: 8px 16px
                 background: blue
-                hover:                             # Q2 pseudo-state
+                hover:
                     background: darkblue
-            on click:                              # Q3 style/on vs children
+            on click:
                 count += 1
 
         if count > 5:

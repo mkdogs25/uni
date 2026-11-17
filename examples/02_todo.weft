@@ -1,23 +1,25 @@
 # Todo list.
-# Covers: list state, mutation vs reassignment, two-way binding, derived values,
-# keyed loops, event modifiers, functions.
+# Exercises: list state and mutation (ADR 0002), bind (0015), derived (0014),
+# keyed loops, event modifiers (0013), class toggles (0008), Python
+# truthiness (0017).
 
 page "Todos":
     state todos: list = []
     state draft = ""
     state next_id = 1
 
-    derived remaining = len([t for t in todos if not t.done])   # Q12 derived
+    derived remaining = len([t for t in todos if not t.done])
 
     def add():
-        if draft.strip() == "":
+        text = draft.strip()
+        if not text:
             return
-        todos.append({id: next_id, text: draft.strip(), done: False})  # Q5 mutation
+        todos.append({id: next_id, text: text, done: False})
         next_id += 1
         draft = ""
 
     def remove(todo):
-        todos = [t for t in todos if t.id != todo.id]               # reassignment
+        todos = [t for t in todos if t.id != todo.id]
 
     main.todo-app:
         style:
@@ -28,30 +30,30 @@ page "Todos":
         h1 "Todos ({remaining} left)"
 
         form:
-            on submit.prevent:                     # Q11 modifiers
+            on submit.prevent:
                 add()
-            input type="text" placeholder="What needs doing?" bind=draft   # Q13
-            button type="submit" disabled=(draft == "") "Add"            # Q9
+            input type="text" placeholder="What needs doing?" bind=draft
+            button type="submit" disabled=(not draft) "Add"
 
         ul.list:
             style:
                 list-style: none
                 padding: 0
-            for todo in todos key todo.id:         # Q5 keyed loop
+            for todo in todos key todo.id:
                 li:
                     style:
                         display: flex
                         gap: 0.5rem
                         align-items: center
                     input type="checkbox" bind=todo.done
-                    span.text class:done=todo.done "{todo.text}"   # Q9 conditional class
+                    span.text class:done=todo.done "{todo.text}":
                         style:
-                            &.done:                # Q2 compound selector
+                            &.done:
                                 text-decoration: line-through
                                 opacity: 0.6
                     button.remove "×":
                         on click:
                             remove(todo)
 
-        if len(todos) == 0:
+        if not todos:
             p.empty "Nothing to do."

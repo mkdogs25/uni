@@ -1,6 +1,13 @@
 # Sign-up form with validation.
-# Covers: several bound inputs, derived validity, conditional error messages,
-# attribute expressions, submit handling with the event object, elif.
+# Exercises: several bound inputs (ADR 0015), derived validity (0014),
+# conditional messages, attribute expressions (0008), submit with an event
+# parameter (0013), elif, bare text children, top-level global style (0011).
+
+style global:
+    .error:
+        color: crimson
+    .ok:
+        color: seagreen
 
 page "Sign up":
     state email = ""
@@ -18,7 +25,7 @@ page "Sign up":
             display: grid
             gap: 0.75rem
             max-width: 24rem
-        on submit.prevent(event):                  # Q11 event argument
+        on submit.prevent(event):
             touched = True
             if valid:
                 submitted = True
@@ -36,7 +43,7 @@ page "Sign up":
 
         label:
             input type="checkbox" bind=agree
-            "I agree to the terms"                 # bare text child
+            " I agree to the terms"
 
         button type="submit" disabled=(touched and not valid) "Create account"
 
@@ -44,9 +51,3 @@ page "Sign up":
             p.ok "Thanks, check your inbox."
         elif touched and not valid:
             p.error "Please fix the errors above."
-
-    style global:                                  # Q7 global styles
-        .error:
-            color: crimson
-        .ok:
-            color: seagreen

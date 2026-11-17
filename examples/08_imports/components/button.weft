@@ -1,10 +1,12 @@
-# A library file: exports components and a helper; has no page.
+# A library file: exports a component and a helper; has no page (ADR 0012).
+# Exercises: typed def with return hint (0021), callback prop (0013),
+# class=expr merged with shorthand (0008), dynamic style value (0011).
 
 def shade(colour: str, amount: int = 10) -> str:
     return "color-mix(in srgb, {colour}, black {amount}%)"
 
-component Button(label: str, kind: str = "primary", on_press = None):   # Q6 callback prop
-    button.btn class:{kind}=True "{label}":        # Q9 dynamic class name
+component Button(label: str, kind: str = "primary", on_press = None):
+    button.btn class=kind "{label}":
         style:
             padding: 0.5rem 1rem
             border: none
