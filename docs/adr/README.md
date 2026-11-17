@@ -27,3 +27,4 @@ Template: `0000-template.md`. Open questions: `../DESIGN-QUESTIONS.md`.
 | [0020](0020-light-type-checking.md) | Light type checking as warnings | Q15 |
 | [0021](0021-hints-everywhere.md) | Type hints everywhere, Python-style | Q20 |
 | [0022](0022-name-weft.md) | Name: Weft (.weft) | Q21 |
+| [0023](0023-browser-ide-pyodide-pages.md) | Browser IDE on Pages via Pyodide | IDE request |

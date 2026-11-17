@@ -1,13 +1,13 @@
 # Weft language specification (v1 draft)
 
-Status: **draft, awaiting approval**. Decisions are in `adr/`; this document
+Status: **approved 2026-11-17** (including proposals S1–S10 in §0). Decisions are in `adr/`; this document
 turns them into rules precise enough to implement. Where it says "ADR nnnn"
 the ADR is the authority; if the two disagree, the ADR wins and this file is
 wrong.
 
-## 0. Details introduced by this spec — please approve or change
+## 0. Details introduced by this spec (approved)
 
-The ADRs left these open. Each is my proposal; none is implemented.
+The ADRs left these open; all ten proposals were approved as written.
 
 | # | Proposal | Alternative |
 |---|----------|-------------|
