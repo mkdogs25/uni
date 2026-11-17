@@ -8,10 +8,12 @@ compiled by a Python compiler to HTML, CSS and JS.
 - Accepted decisions: `docs/adr/README.md` (index). Read before changing
   syntax, semantics, output format or architecture.
 - Design questions (all decided, historical): `docs/DESIGN-QUESTIONS.md`.
-- Spec: `docs/SPEC.md` (draft until approved).
+- Spec: `docs/SPEC.md` (approved 2026-11-17).
 - Progress journal: `docs/JOURNAL.md` — read first when resuming; update at
   the end of every work session (done, decisions, next step).
 - Example programs (also golden-test inputs): `examples/`.
+- Browser IDE: `ide/` (ADR 0023). It only calls `weft/api.py`; keep that
+  API's output contract stable and bump `IMPLEMENTED_PHASE` per phase.
 
 ## Rules
 - **If a request conflicts with an accepted ADR, stop and ask** before doing
@@ -19,7 +21,6 @@ compiled by a Python compiler to HTML, CSS and JS.
   that supersedes it.
 - Do not decide open design questions silently: present 2–3 options with a
   recommendation and let the user choose. Record each choice as an ADR.
-- No implementation code until the user approves `docs/SPEC.md`.
 - Build in stage-gated phases (lexer, parser, HTML, CSS, logic/JS,
   components/imports, CLI polish). A phase is done only when its tests and
   all earlier phases' tests pass. Commit after each passing phase.

@@ -33,6 +33,7 @@
       // Line-start component (capitalised) or tag name.
       { regex: /(\s*)([A-Z][A-Za-z0-9]*)/, sol: true, token: [null, "component"] },
       { regex: /(\s*)([a-z][a-z0-9-]*)(?=[\s.#:]|$)(?!\s*[+\-*/%]?=[^=])/, sol: true, token: [null, "tag"] },
+      { regex: /\{[^}:"']*\}/, token: "interp" },  // dynamic style values (not dict literals)
       { regex: /[.#][A-Za-z_][\w-]*/, token: "shorthand" },
       { regex: /[A-Za-z_][\w-]*(?::[\w-]+)?(?==)(?!==)/, token: "attribute" },
       { regex: new RegExp("\\b(" + keywords + ")\\b"), token: "keyword" },

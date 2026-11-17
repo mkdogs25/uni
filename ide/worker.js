@@ -15,19 +15,20 @@ async function init() {
   status("Loading Python (first visit downloads about 10 MB)…");
   py = await loadPyodide({ indexURL: PYODIDE });
 
+  const manifest = await (await fetch("manifest.json", { cache: "no-cache" })).json();
+
   status("Installing lark…");
-  await py.loadPackage("micropip");
-  await py.pyimport("micropip").install("lark");
+  // Wheels are shipped with the site (see ide/build_site.py), so no PyPI access.
+  await py.loadPackage(manifest.wheels.map((w) => new URL(w, self.location.href).href));
 
   status("Loading the Weft compiler…");
-  const list = await (await fetch("weft-files.json", { cache: "no-cache" })).json();
-  for (const rel of list) {
+  for (const rel of manifest.package_files) {
     const text = await (await fetch("weft/" + rel, { cache: "no-cache" })).text();
     const full = "/lib/weft/" + rel;
     py.FS.mkdirTree(full.slice(0, full.lastIndexOf("/")));
     py.FS.writeFile(full, text);
   }
-  py.runPython("import sys; sys.path.insert(0, '/lib')");
+  py.runPython("import sys; sys.path.insert(0, '/lib'); import lark");
   const api = py.pyimport("weft.api");
   runVirtual = api.run_virtual;
   postMessage({ type: "ready", phase: api.IMPLEMENTED_PHASE, modes: api.MODES.toJs({ dict_converter: Object.fromEntries }) });
