@@ -21,3 +21,6 @@ Template: `0000-template.md`. Open questions: `../DESIGN-QUESTIONS.md`.
 | [0014](0014-derived-watch-lifecycle.md) | derived, watch, on mount/unmount | Q12 |
 | [0015](0015-bind-target.md) | Two-way binding: bind=target | Q13 |
 | [0016](0016-single-default-slot.md) | One default slot per component | Q14 |
+| [0017](0017-logic-subset-semantics.md) | Logic subset: Python syntax, JS semantics, Python truthiness | Q16 |
+| [0018](0018-no-for-else-in-markup.md) | No special empty-list syntax | Q17 |
+| [0019](0019-js-namespace-interop.md) | JS interop via js namespace | Q18 |
