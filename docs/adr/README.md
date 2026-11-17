@@ -17,3 +17,7 @@ Template: `0000-template.md`. Open questions: `../DESIGN-QUESTIONS.md`.
 | [0010](0010-components-signature-dotted-imports.md) | Components: capitalised tags, signature props, dotted imports | Q6 |
 | [0011](0011-scoping-class-per-element.md) | Scoped styles: generated class per element | Q7 |
 | [0012](0012-page-block-entry.md) | Entry point: page block | Q10 |
+| [0013](0013-events-modifiers-and-param.md) | Events: on event.modifiers(param) | Q11 |
+| [0014](0014-derived-watch-lifecycle.md) | derived, watch, on mount/unmount | Q12 |
+| [0015](0015-bind-target.md) | Two-way binding: bind=target | Q13 |
+| [0016](0016-single-default-slot.md) | One default slot per component | Q14 |
